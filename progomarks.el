@@ -22,6 +22,14 @@
 
 ;; Functionality
 
+;; straigth from ElispCookbook
+(defun chomp (str)
+  "Chomp leading and tailing whitespace from STR."
+  (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'"
+                       str)
+    (setq str (replace-match "" t t str)))
+  str)
+
 (defun progomarks--mode ()
   "Init major mode `progomarks'. Not for direct use: activate
 with command `progomarks'."
@@ -59,7 +67,7 @@ with command `progomarks'."
         (while (not (eobp))
           (beginning-of-line)
           (let* ((keystr (progomarks--shortcut counter))
-                 (uri (substring (thing-at-point 'line) 0 -1))
+                 (uri (chomp (thing-at-point 'line)))
                  (opener (lambda ()
                            (interactive)
                            (find-file uri))))
@@ -90,7 +98,7 @@ with command `progomarks'."
     (with-temp-buffer
       (insert-file-contents progomarks-file)
       (end-of-buffer)
-      (insert buf-file "\n")
+      (insert "\n" buf-file)
       (write-region (point-min)
                     (point-max)
                     progomarks-file))))
