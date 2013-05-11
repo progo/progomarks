@@ -1,0 +1,52 @@
+progomarks
+----------
+
+Bookmarks with quick UI, like what Vimperator et al. does: throw a
+couple of letters to denote each file and you only need to type those
+in in order to open that one up.
+
+(Something like "fastmarks" would probably apply as the name.)
+
+
+Install
+-------
+
+- save this file in "~/.emacs.d/elisp"
+- in your ".emacs" add the following:
+
+    (add-to-list 'load-path "~/.emacs.d/elisp")
+    (require 'progomarks)
+
+
+
+Usage
+-----
+
+Edit the file under variable `progomarks-file' (default
+"~/.emacs.d/progomarks") and add URIs to it, line by line. Most
+accessed first.
+
+You may use a command "progomarks-mark-current-file" to add currently
+visible  file to the file storage.
+
+Open the bookmarks listing with command "progomarks".
+There you can bury the buffer with "q".
+
+
+Customize
+---------
+
+The following variables are waiting for you to customize them:
+
+- progomarks-file (default "~/.emacs.d/progomarks"):
+  The file containing the bookmarks, one per line.
+
+- progomarks-alphabet (default "jklfa"):
+  The pool of keys that are used to create quick keys.
+
+- progomarks-endkey (default "w"):
+  The key that always ends the shortcut. (Needed for cover for Emacs'
+  submap handling.) If you decide to use a non-single-letter key such
+  as "SPC" as the end key, please prefix the variable with a space.
+  For example, " SPC".
+      
