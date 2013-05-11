@@ -76,7 +76,7 @@ Emacs' submap requirements we insert another key at the end."
             (define-key progomarks-mode-map
               (read-kbd-macro keystr)
               opener)
-            (insert keystr ": ")
+            (insert (format "%-20s" keystr))
             (forward-line)
             (setq counter (+ 1 counter))))
         (buffer-string)))))
