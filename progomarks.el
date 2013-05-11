@@ -61,7 +61,7 @@ Emacs' submap requirements we insert another key at the end."
   (setq progomarks-mode-map (make-sparse-keymap))
   (suppress-keymap progomarks-mode-map)
   (define-key progomarks-mode-map (kbd "q") 'bury-buffer)
-  (let ((counter 1))
+  (let ((counter 0))
     (when (file-readable-p progomarks-file)
       (with-temp-buffer
         (insert-file-contents progomarks-file)
