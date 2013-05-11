@@ -72,6 +72,7 @@ Emacs' submap requirements we insert another key at the end."
                  (uri (chomp (thing-at-point 'line)))
                  (opener (lambda ()
                            (interactive)
+                           (bury-buffer)
                            (find-file uri))))
             (define-key progomarks-mode-map
               (read-kbd-macro keystr)
