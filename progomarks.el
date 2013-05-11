@@ -18,6 +18,14 @@
 (defvar progomarks-mode-map nil
   "Keymap for progomarks major mode.")
 
+(defvar progomarks-alphabet "jklfa"
+  "The key pool from which the shortcuts are drawn.")
+
+(defvar progomarks-endkey "w"
+  "The key that finishes a shortcut. Must not be present in the
+  alphabet. If you use a non-single-letter key, please prefix by
+  space so that Emacs' key reader understands it correctly.")
+
 (defvar progomarks-mode-hook nil)
 
 ;; Functionality
@@ -44,8 +52,8 @@ with command `progomarks'."
 (defun progomarks--shortcut (num)
   "Turn a number to a Vimperator-like ascii key sequence. To satisfy
 Emacs' submap requirements we insert another key at the end."
-  (let* ((alphabet "jklfa")
-         (finisher " SPC")              ; tab, ret, ',', /, ...
+  (let* ((alphabet progomarks-alphabet)
+         (finisher progomarks-endkey)
          (base (length alphabet))
          (shortcut ""))
     (while (progn
