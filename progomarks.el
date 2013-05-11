@@ -42,8 +42,10 @@ with command `progomarks'."
     (run-hooks 'progomarks-mode-hook)))
 
 (defun progomarks--shortcut (num)
-  "Turn a number to a Vimperator-like ascii key sequence."
-  (let* ((alphabet "jkfalg")
+  "Turn a number to a Vimperator-like ascii key sequence. To satisfy
+Emacs' submap requirements we insert another key at the end."
+  (let* ((alphabet "jklfa")
+         (finisher " SPC")              ; tab, ret, ',', /, ...
          (base (length alphabet))
          (shortcut ""))
     (while (progn
@@ -52,7 +54,7 @@ with command `progomarks'."
                            shortcut))
              (setq num (floor (/ num base)))
              (> num 0)))
-    shortcut))
+    (concat shortcut finisher)))
 
 (defun progomarks--initialize ()
   "Read the marks from the file. And map the keys."
