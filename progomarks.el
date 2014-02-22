@@ -101,7 +101,20 @@ Emacs' submap requirements we insert another key at the end."
       (insert (progomarks--initialize) "\n")
       (progomarks--mode))
     (switch-to-buffer pm-buffer)))
-  
+
+(defun progomarks--bookmarks-list ()
+  "Collect a list of bookmarked paths."
+  (with-temp-buffer
+    (insert-file-contents progomarks-file)
+    (split-string (buffer-string) "\n" t)))
+
+(defun progomarks-ido ()
+  "Use Ido for visiting a bookmarked file."
+  (interactive)
+  (let ((file-to-open (ido-completing-read "open: "
+                                           (progomarks--bookmarks-list))))
+    (find-file file-to-open)))
+
 (defun progomarks-mark-current-file ()
   "Insert the current buffer's file to progomarks file."
   (interactive)
